@@ -1,0 +1,44 @@
+{
+    "vehicles" : [
+        {
+            "id" : "1",
+            "title" : "Motorbike",
+            "mintraveler" : 1,
+            "maxtraveler" : 1,
+            "cost" : 109,
+            "minday" : 1,
+            "maxday" : 5,
+            "feul" : 3.7
+        },
+        {
+            "id" : "2",
+            "title" : "Small car",
+            "mintraveler" : 1,
+            "maxtraveler" : 2,
+            "cost" : 129,
+            "minday" : 1,
+            "maxday" : 10,
+            "feul" : 8.5
+        },
+        {
+            "id" : "3",
+            "title" : "Large car",
+            "mintraveler" : 1,
+            "maxtraveler" : 5,
+            "cost" : 144,
+            "minday" : 3,
+            "maxday" : 10,
+            "feul" : 9.7
+        },
+        {
+            "id" : "4",
+            "title" : "Motor home",
+            "mintraveler" : 2,
+            "maxtraveler" : 6,
+            "cost" : 200,
+            "minday" : 2,
+            "maxday" : 15,
+            "feul" : 17
+        }
+    ]
+}
