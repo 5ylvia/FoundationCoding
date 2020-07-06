@@ -1,1 +1,11 @@
-/* No CSS *//*# sourceMappingURL=main.css.map */
+.landing__icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.landing__icons .icon {
+  margin: 10px;
+}
+/*# sourceMappingURL=main.css.map */

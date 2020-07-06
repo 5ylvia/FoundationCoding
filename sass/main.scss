@@ -1,0 +1,9 @@
+.landing {
+    &__icons {
+        display: flex;
+        width: 100%;
+        .icon {
+            margin: 10px;
+        }
+    }
+}
