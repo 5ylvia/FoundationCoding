@@ -8,4 +8,12 @@
 .landing__icons .icon {
   margin: 10px;
 }
+
+.invalid {
+  border: 2px solid orange;
+}
+
+.danger {
+  color: orange;
+}
 /*# sourceMappingURL=main.css.map */
