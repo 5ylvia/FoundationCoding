@@ -1,17 +1,17 @@
-.landing {
-    &__icons {
-        display: flex;
-        width: 100%;
-        .icon {
-            margin: 10px;
-        }
+@import 'config';
+@import 'form';
+@import 'home';
+@import 'responsive';
+
+
+h1, h2, h3 {font-family: 'Inter', sans-serif;}
+h4, p {font-family: 'Inter', sans-serif;}
+
+.screen {
+    &__logo {
+        width: 100px;
     }
 }
 
-.invalid {
-    border: 2px solid orange;
-}
 
-.danger {
-    color: orange;
-}
+

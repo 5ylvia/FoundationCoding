@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script defer src="js/main.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <section class="screen-one screen">
-        <div class="screen__top"><img src="" alt="" class="screen__logo"></div>
+    <section class="screen--one screen">
+        <div class="screen__top"><img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
         <div class="landing">
             <div class="landing__icons">
                 <!-- display vehicle icons here -->
@@ -18,16 +19,16 @@
             <div class="landing__info"></div>
             <div class="landing__content">
                 <h2>Tell us your trip</h2>
-                <form id="form--user">
+                <form id="user-input">
                     <div class="form__group">
                         <label for="traveldays"></label>
                         <input type="text" name="traveldays" id="traveldays" placeholder="Travel days">
                         <span id="traveldays-error"></span>    
                     </div>
                     <div class="form__group">
-                        <label for="travlers"></label>
-                        <input type="text" name="travlers" id="travlers" placeholder="Number of people">
-                        <span id="travlers-error"></span>    
+                        <label for="travelers"></label>
+                        <input type="text" name="travelers" id="travelers" placeholder="Number of travelers">
+                        <span id="travelers-error"></span>    
                     </div>
                     <div class="form__group">
                         <input type="submit" value="Search your vehicles">
@@ -36,8 +37,16 @@
             </div>
         </div>
     </section>
-    <section class="screen-two screen"></section>
-    <section class="screen-three screen"></section>
-    <section class="screen-four screen"></section>
+    <section class="screen--two screen">
+        <div class="screen__top"><img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
+    </section>
+    <section class="screen--three screen">
+        <div class="screen__top"><img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
+
+    </section>
+    <section class="screen--four screen">
+        <div class="screen__top"><img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
+
+    </section>
 </body>
 </html>

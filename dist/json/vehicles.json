@@ -1,43 +1,35 @@
 {
     "vehicles" : [
         {
-            "id" : "1",
+            "id" : 1,
             "title" : "Motorbike",
-            "mintraveler" : 1,
-            "maxtraveler" : 1,
+            "day" : [1,2,3,4,5],
+            "traveler" : [1],
             "cost" : 109,
-            "minday" : 1,
-            "maxday" : 5,
             "feul" : 3.7
         },
         {
-            "id" : "2",
+            "id" : 2,
             "title" : "Small car",
-            "mintraveler" : 1,
-            "maxtraveler" : 2,
+            "day" : [1,2,3,4,5,6,7,8,9,10],
+            "traveler" : [1,2],
             "cost" : 129,
-            "minday" : 1,
-            "maxday" : 10,
             "feul" : 8.5
         },
         {
-            "id" : "3",
+            "id" : 3,
             "title" : "Large car",
-            "mintraveler" : 1,
-            "maxtraveler" : 5,
+            "day" : [3,4,5,6,7,8,9,10],
+            "traveler" : [1,2,3,4,5],
             "cost" : 144,
-            "minday" : 3,
-            "maxday" : 10,
             "feul" : 9.7
         },
         {
-            "id" : "4",
+            "id" : 4,
             "title" : "Motor home",
-            "mintraveler" : 2,
-            "maxtraveler" : 6,
+            "day" : [2,3,4,5,6,7,8,9,10,11,12,13,14,15],
+            "traveler" : [2,3,4,5,6],
             "cost" : 200,
-            "minday" : 2,
-            "maxday" : 15,
             "feul" : 17
         }
     ]

@@ -7,25 +7,31 @@ function init () {
         vehiclesArray = data.vehicles;
         displayVehicles(vehiclesArray);
     });
-
-    initValidation();
+    addSearchListeners();
 };
+
+// KEYUP EVENT FOR FILTERING ------------------------------------------------- //
+
+
+$('#user-input').on('keyup', function() {
+
+    initValidation($(this)[0]);
+    addSearchListeners($(this)[0]);
+});
 
 // VALIDATE FORM ------------------------------------------------------------- //
 
-function initValidation () {
+function initValidation (form) {
 
-    const el_form = $('#form--user');
-    el_form.on('keyup', function() {
+    let isError = false;
+    const elements = form.elements;
 
-        var isError = false;
-        var elements = el_form[0].elements;
+    $.each(elements, function (i, field) {
+        // let field = elements[i];
         
-        $.each(elements, function (i, field) {
-            if (!isFieldValid(field)) {
-                isError = true;
-            };
-        });
+        if (!isFieldValid(field)) {
+            isError === true;
+        };
     });
 
     function isFieldValid(field) {
@@ -37,7 +43,7 @@ function initValidation () {
         errorSpan.classList.remove('danger');
         errorSpan.innerHTML = '';
     
-        if (validateNumber(field, errorSpan) === false) {
+        if (!validateNumber(field, errorSpan)) {
             return false;
         }
         return true;
@@ -48,20 +54,21 @@ function initValidation () {
             alert('Please type number only!');
             return false;
         }
-        if (field.id === "traveldays" && field.value > 15) {
-            field.classList.add('invalid'); 
-            var errorSpan = document.querySelector('#' + field.id + '-error');
-            errorSpan.classList.add('danger');
+        if ( field.id === "traveldays" && (field.value < 1 || field.value > 15) ) {
+            addErrorSpan(field, errorSpan);
             errorSpan.innerHTML = "Please enter a 1-15 days";
             return false;
         }
-        if (field.id === "travlers" && field.value > 6) {
-            field.classList.add('invalid'); 
-            var errorSpan = document.querySelector('#' + field.id + '-error');
-            errorSpan.classList.add('danger');
-            errorSpan.innerHTML = "It only available for a 1-6 people";
+        if ( field.id === "traveler" && (field.value < 1 || field.value > 6) ) {
+            addErrorSpan(field, errorSpan);
+            errorSpan.innerHTML = "Please enter a 1-6 people";
             return false;
         }
+    }
+
+    function addErrorSpan(field, errorSpan) {
+        field.classList.add('invalid'); 
+        errorSpan.classList.add('danger');
     }
     
     function isNumber(input) {
@@ -76,16 +83,23 @@ function initValidation () {
 // DISPLAY VEHICLES ---------------------------------------------------------- //
 
 function displayVehicles (vehicles) {
-    let el_vehicleList = $('.landing__icons');
-    var html = '';
+    const el_vehicleIcon = $('.landing__icons');
+    var iconHTML = '';
+
+    // const el_vehicleList = $('.');
+    // var listHTML = '';
+
     $.each(vehicles, function (i, vehicle) {
-        html += makeListHTML(vehicle);
+        iconHTML += makeIconHTML(vehicle);
+        // listHTML += makeListHTML(vehicle);
     });
-    el_vehicleList.html(html);
+    el_vehicleIcon.html(iconHTML);
+    // el_vehicleList.html(listHTML);
     addIconClickListener();
+
 }
 
-function makeListHTML (vehicle) {
+function makeIconHTML (vehicle) {
     return `
     <div class="icon" data-id="${vehicle.id}">
         <img src="/dist/image/icon${vehicle.id}.png" alt="${vehicle.title}">
@@ -100,6 +114,22 @@ function addIconClickListener () {
         viewVehicleInfo(id);
     });
 }
+// FILTER BY INPUT ----------------------------------------------------------- //
+
+function addSearchListeners() {
+    var day = ($('input[name=traveldays]').val()) * 1;
+    var traveler = ($('input[name=travelers]').val()) * 1;
+
+    var matches = [];
+    $.each(vehiclesArray, function(i, vehicle) {
+        if ( vehicle.day.includes(day) && vehicle.traveler.includes(traveler) ) {
+            matches.push(vehiclesArray[i]);
+        }
+    });
+    displayVehicles(matches);
+
+}
+
 
 // VIEW VEHICLES ------------------------------------------------------------- //
 
@@ -107,12 +137,14 @@ function addIconClickListener () {
 function viewVehicleInfo (id) {
     $.each(vehiclesArray, function(i, vehicle) {
         if (vehicle.id == id) {
-            let vehicle = vehiclesArray[i];
-            $('.landing__info').html(vehicle.mintraveler + " ~ " + vehicle.maxtraveler + " people");
+            let vehicle = vehiclesArray[i].traveler;
+            let maxTraveler = Math.max.apply(null, vehicle);
+            let minTraveler = Math.min.apply(null, vehicle);
+
+            $('.landing__info').html(minTraveler + " ~ " + maxTraveler + " people");
         }
     })
 }
-
 
 
 // RUN ----------------------------------------------------------------------- // 
