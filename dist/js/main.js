@@ -2,19 +2,18 @@ var vehiclesArray = [];
 
 // INITIALISE ---------------------------------------------------------------- // 
 
-function init () {
+$(function init () {
     $.getJSON('/dist/json/vehicles.json', function(data) {
         vehiclesArray = data.vehicles;
-        displayVehicles(vehiclesArray);
+        displayIconList(vehiclesArray);
     });
     addSearchListeners();
-};
+    addClickEvent();
+});
 
-// KEYUP EVENT FOR FILTERING ------------------------------------------------- //
-
+// FILTERING BY INPUT -------------------------------------------------------- //
 
 $('#user-input').on('keyup', function() {
-
     initValidation($(this)[0]);
     addSearchListeners($(this)[0]);
 });
@@ -26,9 +25,7 @@ function initValidation (form) {
     let isError = false;
     const elements = form.elements;
 
-    $.each(elements, function (i, field) {
-        // let field = elements[i];
-        
+    $.each(elements, function (i, field) {        
         if (!isFieldValid(field)) {
             isError === true;
         };
@@ -59,7 +56,7 @@ function initValidation (form) {
             errorSpan.innerHTML = "Please enter a 1-15 days";
             return false;
         }
-        if ( field.id === "traveler" && (field.value < 1 || field.value > 6) ) {
+        if ( field.id === "travelers" && (field.value < 1 || field.value > 6) ) {
             addErrorSpan(field, errorSpan);
             errorSpan.innerHTML = "Please enter a 1-6 people";
             return false;
@@ -80,23 +77,17 @@ function initValidation (form) {
     };
 }
 
-// DISPLAY VEHICLES ---------------------------------------------------------- //
+// DISPLAY ICON LIST --------------------------------------------------------- //
 
-function displayVehicles (vehicles) {
+function displayIconList (vehicles) {
     const el_vehicleIcon = $('.landing__icons');
     var iconHTML = '';
 
-    // const el_vehicleList = $('.');
-    // var listHTML = '';
-
     $.each(vehicles, function (i, vehicle) {
         iconHTML += makeIconHTML(vehicle);
-        // listHTML += makeListHTML(vehicle);
     });
     el_vehicleIcon.html(iconHTML);
-    // el_vehicleList.html(listHTML);
     addIconClickListener();
-
 }
 
 function makeIconHTML (vehicle) {
@@ -114,6 +105,7 @@ function addIconClickListener () {
         viewVehicleInfo(id);
     });
 }
+
 // FILTER BY INPUT ----------------------------------------------------------- //
 
 function addSearchListeners() {
@@ -124,15 +116,15 @@ function addSearchListeners() {
     $.each(vehiclesArray, function(i, vehicle) {
         if ( vehicle.day.includes(day) && vehicle.traveler.includes(traveler) ) {
             matches.push(vehiclesArray[i]);
-        }
+        } 
+        // else {alert('hi');}
     });
+    displayIconList(matches);
     displayVehicles(matches);
-
 }
 
 
 // VIEW VEHICLES ------------------------------------------------------------- //
-
 
 function viewVehicleInfo (id) {
     $.each(vehiclesArray, function(i, vehicle) {
@@ -142,10 +134,46 @@ function viewVehicleInfo (id) {
             let minTraveler = Math.min.apply(null, vehicle);
 
             $('.landing__info').html(minTraveler + " ~ " + maxTraveler + " people");
-        }
-    })
+        };
+    });
+}
+
+// SWICH SCREEN -------------------------------------------------------------- //
+
+
+// function switchScreen (a) {
+//     console.log(a);
+// }
+
+function addClickEvent() {
+    $('input:submit').click(function(event) {
+        event.preventDefault();
+        var a = $(this).parent();
+        console.log(a);
+        // switchScreen(a);
+    });
 }
 
 
-// RUN ----------------------------------------------------------------------- // 
-init();
+// DISPLAY VEHICLES ---------------------------------------------------------- //
+function displayVehicles (vehicles) {
+
+    const el_vehicleList = $('.content');
+    var vehicleHTML = '';
+
+    $.each(vehicles, function (i, vehicle) {
+        vehicleHTML += makevehicleHTML(vehicle);
+    });
+    el_vehicleList.html(vehicleHTML);
+}
+
+function makevehicleHTML (vehicle) {
+    return `
+    <div class="content__box">
+        <img src="/dist/image/icon${vehicle.id}.png" alt="${vehicle.title}">
+        <h3>${vehicle.title}</h3>
+        <div></div>
+        <input type="submit" value="Select it">
+    </div>
+    `
+}

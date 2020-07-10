@@ -42,6 +42,10 @@
   margin: 10px;
 }
 
+.landing .highlight {
+  background-color: yellow;
+}
+
 h1, h2, h3 {
   font-family: 'Inter', sans-serif;
 }
@@ -50,7 +54,15 @@ h4, p {
   font-family: 'Inter', sans-serif;
 }
 
+.screen {
+  width: 100vw;
+}
+
 .screen__logo {
   width: 100px;
+}
+
+.screen--0, .screen--3 {
+  height: 100vh;
 }
 /*# sourceMappingURL=main.css.map */
