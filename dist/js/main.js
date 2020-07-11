@@ -7,15 +7,14 @@ $(function init () {
         vehiclesArray = data.vehicles;
         displayIconList(vehiclesArray);
     });
-    addSearchListeners();
-    addClickEvent();
 });
 
 // FILTERING BY INPUT -------------------------------------------------------- //
 
 $('#user-input').on('keyup', function() {
-    initValidation($(this)[0]);
-    addSearchListeners($(this)[0]);
+    var form = $(this)[0];
+    initValidation(form);
+    addSearchListeners(form);
 });
 
 // VALIDATE FORM ------------------------------------------------------------- //
@@ -141,16 +140,29 @@ function viewVehicleInfo (id) {
 // SWICH SCREEN -------------------------------------------------------------- //
 
 
-// function switchScreen (a) {
-//     console.log(a);
-// }
+function initScreens () {
+    const el_screens = $('.screen');
+    nextToScreen(event, el_screens);
+    backToScreen(event, el_screens)
+    el_screens.slice(1).hide();    
+}
 
-function addClickEvent() {
-    $('input:submit').click(function(event) {
+function nextToScreen(event, el_screens) {
+    let index = 0;
+    $('input:submit').on('click', function(event){
         event.preventDefault();
-        var a = $(this).parent();
-        console.log(a);
-        // switchScreen(a);
+        el_screens.hide();
+        index++;
+        $('.screen--'+index).show();
+    });
+}
+
+function backToScreen(event, el_screens) {
+    $('input:button').on('click', function(event){
+        event.preventDefault();
+        el_screens.hide();
+        index--;
+        $('.screen--'+index).show();
     });
 }
 
@@ -165,6 +177,7 @@ function displayVehicles (vehicles) {
         vehicleHTML += makevehicleHTML(vehicle);
     });
     el_vehicleList.html(vehicleHTML);
+    initScreens();
 }
 
 function makevehicleHTML (vehicle) {
