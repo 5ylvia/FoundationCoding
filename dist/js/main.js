@@ -1,4 +1,4 @@
-var vehiclesArray = [];
+let vehiclesArray = [];
 
 // INITIALISE ---------------------------------------------------------------- // 
 
@@ -7,15 +7,25 @@ $(function init () {
         vehiclesArray = data.vehicles;
         displayIconList(vehiclesArray);
     });
+    initScreens();
 });
 
 // FILTERING BY INPUT -------------------------------------------------------- //
 
 $('#user-input').on('keyup', function() {
-    var form = $(this)[0];
+    $('.landing__info').html('');
+    let form = $(this)[0];
     initValidation(form);
     addSearchListeners(form);
 });
+
+// DISPLAY INPUT ------------------------------------------------------------- //
+
+
+$('#user-input').on('submit', function() {
+    
+});
+
 
 // VALIDATE FORM ------------------------------------------------------------- //
 
@@ -80,7 +90,7 @@ function initValidation (form) {
 
 function displayIconList (vehicles) {
     const el_vehicleIcon = $('.landing__icons');
-    var iconHTML = '';
+    let iconHTML = '';
 
     $.each(vehicles, function (i, vehicle) {
         iconHTML += makeIconHTML(vehicle);
@@ -100,7 +110,7 @@ function makeIconHTML (vehicle) {
 
 function addIconClickListener () {
     $('.icon').on('click', function() {
-        var id = $(this).data('id');
+        let id = $(this).data('id');
         viewVehicleInfo(id);
     });
 }
@@ -108,10 +118,10 @@ function addIconClickListener () {
 // FILTER BY INPUT ----------------------------------------------------------- //
 
 function addSearchListeners() {
-    var day = ($('input[name=traveldays]').val()) * 1;
-    var traveler = ($('input[name=travelers]').val()) * 1;
+    let day = ($('input[name=traveldays]').val()) * 1;
+    let traveler = ($('input[name=travelers]').val()) * 1;
 
-    var matches = [];
+    let matches = [];
     $.each(vehiclesArray, function(i, vehicle) {
         if ( vehicle.day.includes(day) && vehicle.traveler.includes(traveler) ) {
             matches.push(vehiclesArray[i]);
@@ -139,39 +149,38 @@ function viewVehicleInfo (id) {
 
 // SWICH SCREEN -------------------------------------------------------------- //
 
-
 function initScreens () {
     const el_screens = $('.screen');
-    nextToScreen(event, el_screens);
-    backToScreen(event, el_screens)
+    nextToScreen(el_screens);
+    backToScreen(el_screens);
     el_screens.slice(1).hide();    
 }
 
-function nextToScreen(event, el_screens) {
-    let index = 0;
-    $('input:submit').on('click', function(event){
+function nextToScreen(el_screens) {
+    $(':submit').off().on('click', function(event){
         event.preventDefault();
         el_screens.hide();
-        index++;
-        $('.screen--'+index).show();
+        const currentIndex = $(this).data('next');
+        const nextIndex = currentIndex + 1;
+        $(el_screens[nextIndex]).show();
     });
 }
 
-function backToScreen(event, el_screens) {
-    $('input:button').on('click', function(event){
+function backToScreen(el_screens) {
+    $(':button').off().on('click', function(event){
         event.preventDefault();
         el_screens.hide();
-        index--;
-        $('.screen--'+index).show();
+        const currentIndex = $(this).data('back');
+        const backIndex = currentIndex - 1;
+        $(el_screens[backIndex]).show();
     });
 }
-
 
 // DISPLAY VEHICLES ---------------------------------------------------------- //
 function displayVehicles (vehicles) {
 
     const el_vehicleList = $('.content');
-    var vehicleHTML = '';
+    let vehicleHTML = '';
 
     $.each(vehicles, function (i, vehicle) {
         vehicleHTML += makevehicleHTML(vehicle);
@@ -185,8 +194,8 @@ function makevehicleHTML (vehicle) {
     <div class="content__box">
         <img src="/dist/image/icon${vehicle.id}.png" alt="${vehicle.title}">
         <h3>${vehicle.title}</h3>
-        <div></div>
-        <input type="submit" value="Select it">
+        <div>NZD ${vehicle.cost}/day ${vehicle.feul}/100km</div>
+        <input data-next="1" type="submit" value="Select it">
     </div>
     `
 }
