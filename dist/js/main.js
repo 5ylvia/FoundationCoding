@@ -1,4 +1,5 @@
 let vehiclesArray = [];
+let userDetail = {};
 
 // INITIALISE ---------------------------------------------------------------- // 
 
@@ -8,23 +9,31 @@ $(function init () {
         displayIconList(vehiclesArray);
     });
     initScreens();
+    initFilterByInput();
+    addLogoClickListener();
 });
 
 // FILTERING BY INPUT -------------------------------------------------------- //
 
-$('#user-input').on('keyup', function() {
-    $('.landing__info').html('');
-    let form = $(this)[0];
-    initValidation(form);
-    addSearchListeners(form);
-});
+function initFilterByInput () {
+    $('#user-input').on('keyup', function() {
+        $('.landing__text').html('');
+        let form = $(this)[0];
+        initValidation(form);
+        addSearchListeners(form);
+    });
+
+}
 
 // DISPLAY INPUT ------------------------------------------------------------- //
 
+function displayUserDetail () {
+    userDetail.travelDay = $('#traveldays').val();
+    userDetail.travelers = $('#travelers').val();
+    $('.content__traveldays').html(userDetail.travelDay + "days");
+    $('.content__travelers').html(userDetail.travelers + "people");    
+}
 
-$('#user-input').on('submit', function() {
-    
-});
 
 
 // VALIDATE FORM ------------------------------------------------------------- //
@@ -39,6 +48,9 @@ function initValidation (form) {
             isError === true;
         };
     });
+    if (isError === false) {
+        displayUserDetail();
+    }
 
     function isFieldValid(field) {
         if (!needsValidation(field)) {
@@ -125,9 +137,11 @@ function addSearchListeners() {
     $.each(vehiclesArray, function(i, vehicle) {
         if ( vehicle.day.includes(day) && vehicle.traveler.includes(traveler) ) {
             matches.push(vehiclesArray[i]);
-        } 
-        // else {alert('hi');}
+        }
     });
+    if (matches.length == 0) {
+        alert ('No matches! Try different number.');
+    }
     displayIconList(matches);
     displayVehicles(matches);
 }
@@ -142,7 +156,7 @@ function viewVehicleInfo (id) {
             let maxTraveler = Math.max.apply(null, vehicle);
             let minTraveler = Math.min.apply(null, vehicle);
 
-            $('.landing__info').html(minTraveler + " ~ " + maxTraveler + " people");
+            $('.landing__text').html(minTraveler + " ~ " + maxTraveler + " people");
         };
     });
 }
@@ -153,7 +167,7 @@ function initScreens () {
     const el_screens = $('.screen');
     nextToScreen(el_screens);
     backToScreen(el_screens);
-    el_screens.slice(1).hide();    
+    el_screens.slice(1).hide();
 }
 
 function nextToScreen(el_screens) {
@@ -166,8 +180,9 @@ function nextToScreen(el_screens) {
     });
 }
 
+
 function backToScreen(el_screens) {
-    $(':button').off().on('click', function(event){
+    $('.back').off().on('click', function(event){
         event.preventDefault();
         el_screens.hide();
         const currentIndex = $(this).data('back');
@@ -176,10 +191,16 @@ function backToScreen(el_screens) {
     });
 }
 
+function addLogoClickListener () {
+    const el_screens = $('.screen');
+    $('.screen__before img').click(function() {
+        el_screens.slice(0,1).show();
+    })
+}
+
 // DISPLAY VEHICLES ---------------------------------------------------------- //
 function displayVehicles (vehicles) {
-
-    const el_vehicleList = $('.content');
+    const el_vehicleList = $('.content__media');
     let vehicleHTML = '';
 
     $.each(vehicles, function (i, vehicle) {
@@ -199,3 +220,19 @@ function makevehicleHTML (vehicle) {
     </div>
     `
 }
+
+
+
+// DISPLAY MAP --------------------------------------------------------------- //
+
+var mymap = L.map('map').setView([51.505, -0.09], 13);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoiNXYiLCJhIjoiY2tiaXhjNnFqMGhseTJ5azAycDlmZm05aCJ9.JYtaCI63YUbc0RzpP4GeXA'
+}).addTo(mymap);
+

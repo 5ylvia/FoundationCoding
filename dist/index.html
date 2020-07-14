@@ -6,17 +6,21 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
     <script defer src="js/main.js"></script>
     <title>Document</title>
 </head>
 <body>
+    <div class="screen__before">
+        <img src="/dist/image/logo.png" alt="logo" class="screen__logo">
+    </div>
     <section class="screen--0 screen">
-        <div class="screen__top"><img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
         <div class="landing">
             <div class="landing__icons">
                 <!-- display vehicle icons here -->
             </div>
-            <div class="landing__info"></div>
+            <div class="landing__text"></div>
             <div class="landing__content">
                 <h2>Tell us your trip</h2>
                 <form id="user-input">
@@ -31,27 +35,55 @@
                         <span id="travelers-error"></span>    
                     </div>
                     <div class="form__group">
-                        <input data-next="0" type="submit" value="Search your vehicles">
+                        <input id="submit" data-next="0" type="submit" value="Search your vehicles">
                     </div>
                 </form>
             </div>
         </div>
     </section>
     <section class="screen--1 screen">
-        <div class="screen__top"><img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
-        <input data-back="1" type="button" value="back">
         <div class="content">
-            <!-- vevhivles here -->
+            <div class="content__top">
+                <h1 class="content__traveldays"></h1>
+                <h1 class="content__travelers"></h1>
+                <input data-back="1" type="button" class="back" value="back">
+            </div>
+            <div class="content__media">
+                <!-- vevhivles here -->
+
+            </div>
         </div>
     </section>
     <section class="screen--2 screen">
-        <div class="screen__top">screen2<img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
-        <input data-back="2" type="button" value="back">
-        <input data-next="2" type="submit" name="" id="">
+        <div class="content">
+            <div class="content__top">
+                <h1></h1>
+                <h1></h1>
+                <input data-back="2" type="button" class="back" value="back">
+            </div>
+            <div class="content__location">
+                <h2>Plan your Trip</h2>
+                <form id="location-input">
+                    <div class="form__group">
+                        <label for="startpoint"></label>
+                        <input type="select" name="startpoint" id="startpoint" placeholder="From">
+                        <span id="startpoint-error"></span>    
+                    </div>
+                    <div class="form__group">
+                        <label for="endpoint"></label>
+                        <input type="select" name="endpoint" id="endpoint" placeholder="To">
+                        <span id="endpoint-error"></span>    
+                    </div>
+                    <div class="form__group">
+                        <input data-next="2" type="submit" name="" id="">
+                    </div>
+                </form>
+                <div id="map"></div>
+            </div>
+        </div>
     </section>
     <section class="screen--3 screen">
-        <div class="screen__top">screen3<img src="/dist/image/logo.png" alt="logo" class="screen__logo"></div>
-        <input data-back="3" type="button" value="back">
+        <input data-back="3" type="button" class="back" value="back">
         <input data-next="3" type="submit" name="" id="">
     </section>
 </body>

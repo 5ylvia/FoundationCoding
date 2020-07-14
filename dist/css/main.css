@@ -5,6 +5,21 @@
   padding: 0;
 }
 
+.landing__icons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+}
+
+.landing__icons .icon {
+  margin: 10px;
+}
+
+.landing .highlight {
+  background-color: yellow;
+}
+
 #user-input .form__group {
   padding: 10px;
 }
@@ -31,19 +46,8 @@
   color: #FCBC3F;
 }
 
-.landing__icons {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 100%;
-}
-
-.landing__icons .icon {
-  margin: 10px;
-}
-
-.landing .highlight {
-  background-color: yellow;
+#map {
+  height: 580px;
 }
 
 h1, h2, h3 {
