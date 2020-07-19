@@ -1,5 +1,5 @@
 @import 'config';
-@import 'index';
+@import 'home';
 @import 'form';
 @import 'map';
 @import 'responsive';
@@ -8,14 +8,17 @@
 h1, h2, h3 {font-family: 'Inter', sans-serif;}
 h4, p {font-family: 'Inter', sans-serif;}
 
-.screen {
-    width: 100vw;
+.header {
     &__logo {
         width: 100px;
     }
-    &--0, &--3 {
-        height: 100vh;
-    }
+    // &__container
+}
+.screen {
+    width: 100vw;
+    // &--0, &--3 {
+    //     height: 100vh;
+    // }
 }
 
 

@@ -6,32 +6,43 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script> -->
+
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
     <script defer src="js/main.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div class="screen__before">
-        <img src="/dist/image/logo.png" alt="logo" class="screen__logo">
-    </div>
-    <section class="screen--0 screen">
-        <div class="landing">
-            <div class="landing__icons">
-                <!-- display vehicle icons here -->
+    <header>
+        <img src="/dist/image/logo.png" alt="logo" class="header__logo">
+        <div class="header__container">
+            <div class="color-bar"></div>
+        </div>
+    </header>
+
+    <section class="screen">
+        <div class="page">
+            <div class="page__top">
+                <div class="top__icons">
+                    <!-- display vehicle icons here -->
+                </div>
+                <div class="top__text">
+                    <!-- show the vehicle information here -->
+                </div>    
             </div>
-            <div class="landing__text"></div>
-            <div class="landing__content">
+            <div class="page__inner">
                 <h2>Tell us your trip</h2>
                 <form id="user-input">
                     <div class="form__group">
                         <label for="traveldays"></label>
-                        <input type="text" name="traveldays" id="traveldays" placeholder="Travel days">
+                        <input type="number" name="traveldays" id="traveldays" placeholder="Travel days">
                         <span id="traveldays-error"></span>    
                     </div>
                     <div class="form__group">
                         <label for="travelers"></label>
-                        <input type="text" name="travelers" id="travelers" placeholder="Number of travelers">
+                        <input type="number" name="travelers" id="travelers" placeholder="Number of travelers">
                         <span id="travelers-error"></span>    
                     </div>
                     <div class="form__group">
@@ -41,50 +52,99 @@
             </div>
         </div>
     </section>
-    <section class="screen--1 screen">
-        <div class="content">
-            <div class="content__top">
-                <h1 class="content__traveldays"></h1>
-                <h1 class="content__travelers"></h1>
-                <input data-back="1" type="button" class="back" value="back">
+    <section class="screen">
+        <div class="page">
+            <div class="page__top">
+                <div class="top__container">
+                    <h1 class="top__traveldays"></h1>
+                    <h1 class="top__travelers"></h1>
+                    <input data-back="1" type="button" class="back" value="back">
+                </div>    
             </div>
-            <div class="content__media">
+            <div class="page__contents">
                 <!-- vevhivles here -->
-
             </div>
         </div>
     </section>
-    <section class="screen--2 screen">
-        <div class="content">
-            <div class="content__top">
-                <h1></h1>
-                <h1></h1>
-                <input data-back="2" type="button" class="back" value="back">
+    <section class="screen">
+        <div class="page">
+            <div class="page__top">
+                <div class="top__container">
+                    <img src="" alt="">
+                    <h1></h1>
+                    <input data-back="2" type="button" class="back" value="back">
+                </div>    
             </div>
-            <div class="content__location">
+            <div class="page__location">
                 <h2>Plan your Trip</h2>
                 <form id="location-input">
                     <div class="form__group">
                         <label for="startpoint"></label>
-                        <input type="select" name="startpoint" id="startpoint" placeholder="From">
-                        <span id="startpoint-error"></span>    
+                        <input list="locations" name="startpoint" id="startpoint" placeholder="Select the start point">
+                        <datalist id="locations">
+                            <option data-location="00" value="Auckland">
+                            <option data-location="01" value="Christchurch">
+                            <option data-location="02" value="Queenstown">
+                            <option data-location="03" value="Rotorua">
+                            <option data-location="04" value="Wellington">
+                            <option data-location="05" value="Dunedin">
+                            <option data-location="06" value="Nelson">
+                            <option data-location="07" value="Napier">
+                            <option data-location="08" value="Hamilton">
+                            <option data-location="09" value="Whangarei">
+                            <option data-location="10" value="Tauranga">
+                            <option data-location="11" value="New Plymouth">
+                        </datalist>
+                        <span id="startpoint-error"></span>  
                     </div>
                     <div class="form__group">
                         <label for="endpoint"></label>
-                        <input type="select" name="endpoint" id="endpoint" placeholder="To">
+                        <input list="locations" type="text" name="endpoint" id="endpoint" placeholder="Select the end point">
                         <span id="endpoint-error"></span>    
                     </div>
                     <div class="form__group">
                         <input data-next="2" type="submit" name="" id="">
                     </div>
                 </form>
-                <div id="map"></div>
+            </div>
+            <div id="map"></div>
+        </div>
+    </section>
+    <section class="screen">
+        <div class="page">
+            <div class="page__inner">
+                <img src="" alt="">
+                <h2></h2>
+                <div class="inner__container">
+                    <div class="column">
+                        <h4></h4>
+                        <h3></h3>
+                    </div>
+                    <div class="column">
+                        <h4></h4>
+                        <h3></h3>
+                    </div>
+                </div>
+                <div class="inner__container">
+                    <h4></h4>
+                    <h3></h3>
+                </div>
+                <div class="inner__container">
+                    <h4></h4>
+                    <h3></h3>
+                </div>
+                <div class="inner__container">
+                    <h3></h3>
+                    <p></p>
+                    <h1></h1>
+                </div>
+                <input data-next="3" type="submit" value="Done" name="" id="">
             </div>
         </div>
     </section>
-    <section class="screen--3 screen">
-        <input data-back="3" type="button" class="back" value="back">
-        <input data-next="3" type="submit" name="" id="">
-    </section>
+
+    <footer>
+        <h3>TOURISM NEW ZEALAND</h3>
+    </footer>
 </body>
 </html>

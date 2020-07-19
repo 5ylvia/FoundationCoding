@@ -1,14 +1,18 @@
 
-.landing {
+.top {
     &__icons {
         display: flex;
         width: 100%;
         .icon {
             margin: 10px;
         }
+        .highlight {
+            opacity: 1;
+        }
+    }
 
-    }
-    .highlight {
-        background-color: yellow;
-    }
+}
+
+.icon {
+    opacity: 0.3;
 }

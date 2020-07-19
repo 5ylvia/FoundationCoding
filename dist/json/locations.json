@@ -1,0 +1,90 @@
+{
+    "locations": [
+        {
+            "id": "00",
+            "title": "Auckland",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [174.792, -36.859]
+        },
+        {
+            "id": "01",
+            "title": "Christchurch",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [172.641, -43.528]
+        },
+        {
+            "id": "02",
+            "title": "Queenstown",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [168.684, -45.028]
+    
+        },
+        {
+            "id": "03",
+            "title": "Rotorua",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [176.248, -38.146]
+        },
+        {
+            "id": "04",
+            "title": "Wellington",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [174.769, -41.287]
+        },
+        {
+            "id": "05",
+            "title": "Dunedin",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [170.505, -45.873]
+        },
+        {
+            "id": "06",
+            "title": "Nelson",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [173.281, -41.261]
+        },
+        {
+            "id": "07",
+            "title": "Napier",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [176.914, -39.493]
+        },
+        {
+            "id": "08",
+            "title": "Hamilton",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [175.284, -37.787]
+        },
+        {
+            "id": "09",
+            "title": "Whangarei",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [174.318, -35.728]
+        },
+        {
+            "id": "10",
+            "title": "Tauranga",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [176.166, -37.685]
+        },
+        {
+            "id": 11,
+            "title": "New Plymouth",
+            "marker-color": "#FCBC3F",
+            "marker-size": "small",
+            "coordinates": [174.081,-39.057]
+        }
+
+    ]
+}
