@@ -1,18 +1,25 @@
-
+.header {
+    width: 100vw;
+    &__container {
+        width: 100%;
+        #color-bar {
+            // width: 100%;
+            height: 0.5rem;
+            background-color: $secondary;
+        }
+    }
+}
 .top {
     &__icons {
         display: flex;
         width: 100%;
         .icon {
+            opacity: 0.3;
             margin: 10px;
         }
         .highlight {
             opacity: 1;
         }
     }
-
 }
 
-.icon {
-    opacity: 0.3;
-}

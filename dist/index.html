@@ -8,7 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script> -->
-
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
     <script defer src="js/main.js"></script>
@@ -18,7 +18,7 @@
     <header>
         <img src="/dist/image/logo.png" alt="logo" class="header__logo">
         <div class="header__container">
-            <div class="color-bar"></div>
+            <div id="color-bar"></div>
         </div>
     </header>
 
@@ -37,16 +37,16 @@
                 <form id="user-input">
                     <div class="form__group">
                         <label for="traveldays"></label>
-                        <input type="number" name="traveldays" id="traveldays" placeholder="Travel days">
+                        <input type="text" name="traveldays" id="traveldays" placeholder="Travel days">
                         <span id="traveldays-error"></span>    
                     </div>
                     <div class="form__group">
                         <label for="travelers"></label>
-                        <input type="number" name="travelers" id="travelers" placeholder="Number of travelers">
+                        <input type="text" name="travelers" id="travelers" placeholder="Number of travelers">
                         <span id="travelers-error"></span>    
                     </div>
                     <div class="form__group">
-                        <input id="submit" data-next="0" type="submit" value="Search your vehicles">
+                        <input id="submit-user" type="submit" value="Search your vehicles">
                     </div>
                 </form>
             </div>
@@ -58,7 +58,7 @@
                 <div class="top__container">
                     <h1 class="top__traveldays"></h1>
                     <h1 class="top__travelers"></h1>
-                    <input data-back="1" type="button" class="back" value="back">
+                    <a data-back="1" class="back"><i class="fas fa-arrow-left"></i></a>
                 </div>    
             </div>
             <div class="page__contents">
@@ -70,9 +70,9 @@
         <div class="page">
             <div class="page__top">
                 <div class="top__container">
-                    <img src="" alt="">
-                    <h1></h1>
-                    <input data-back="2" type="button" class="back" value="back">
+                    <img class="vehicle-icon" src="" alt="">
+                    <h1 class="vehicle-title" ></h1>
+                    <a data-back="2" class="back"><i class="fas fa-arrow-left"></i></a>
                 </div>    
             </div>
             <div class="page__location">
@@ -103,7 +103,7 @@
                         <span id="endpoint-error"></span>    
                     </div>
                     <div class="form__group">
-                        <input data-next="2" type="submit" name="" id="">
+                        <input type="submit" name="" id="submit-location">
                     </div>
                 </form>
             </div>
@@ -113,8 +113,9 @@
     <section class="screen">
         <div class="page">
             <div class="page__inner">
-                <img src="" alt="">
-                <h2></h2>
+                <img class="vehicle-icon" src="" alt="">
+                <a data-back="3" class="back"><i class="fas fa-arrow-left"></i></a>
+                <h2>Here is your plan</h2>
                 <div class="inner__container">
                     <div class="column">
                         <h4></h4>
@@ -138,7 +139,7 @@
                     <p></p>
                     <h1></h1>
                 </div>
-                <input data-next="3" type="submit" value="Done" name="" id="">
+                <input type="submit" value="Done" name="" id="">
             </div>
         </div>
     </section>

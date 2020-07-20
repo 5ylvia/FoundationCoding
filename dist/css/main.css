@@ -5,6 +5,19 @@
   padding: 0;
 }
 
+.header {
+  width: 100vw;
+}
+
+.header__container {
+  width: 100%;
+}
+
+.header__container #color-bar {
+  height: 0.5rem;
+  background-color: #FCBC3F;
+}
+
 .top__icons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13,15 +26,12 @@
 }
 
 .top__icons .icon {
+  opacity: 0.3;
   margin: 10px;
 }
 
 .top__icons .highlight {
   opacity: 1;
-}
-
-.icon {
-  opacity: 0.3;
 }
 
 .form__group {
