@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="css/main.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />
+    <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' /> -->
     <script defer src="js/main.js"></script>
     <title>Document</title>
 </head>
@@ -79,27 +79,16 @@
                 <h2>Plan your Trip</h2>
                 <form id="location-input">
                     <div class="form__group">
-                        <label for="startpoint"></label>
-                        <input list="locations" name="startpoint" id="startpoint" placeholder="Select the start point">
-                        <datalist id="locations">
-                            <option data-location="00" value="Auckland">
-                            <option data-location="01" value="Christchurch">
-                            <option data-location="02" value="Queenstown">
-                            <option data-location="03" value="Rotorua">
-                            <option data-location="04" value="Wellington">
-                            <option data-location="05" value="Dunedin">
-                            <option data-location="06" value="Nelson">
-                            <option data-location="07" value="Napier">
-                            <option data-location="08" value="Hamilton">
-                            <option data-location="09" value="Whangarei">
-                            <option data-location="10" value="Tauranga">
-                            <option data-location="11" value="New Plymouth">
-                        </datalist>
-                        <span id="startpoint-error"></span>  
+                        <label for="startpoint">Start point</label>
+                        <select id="startpoint">
+                            <!-- display options here -->
+                        </select>
                     </div>
                     <div class="form__group">
-                        <label for="endpoint"></label>
-                        <input list="locations" type="text" name="endpoint" id="endpoint" placeholder="Select the end point">
+                        <label for="endpoint">End point</label>
+                        <select id="endpoint">
+                            <!-- display options here -->
+                        </select>
                         <span id="endpoint-error"></span>    
                     </div>
                     <div class="form__group">

@@ -1,6 +1,6 @@
 .form__group {
     padding: 10px;
-    input {
+    input, select{
         height: 50px;
         width: 40%;
         min-width: 310px;
@@ -18,4 +18,19 @@
     .danger {
         color: $secondary;
     }
+    select {
+        font-family: inherit;
+        background: url('이미지 경로') no-repeat 95% 50%;
+        border: 1px solid #999;
+        border-radius: 0px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+    }
+    
+    select::-ms-expand {
+        display: none;
+    }
+    
 }
