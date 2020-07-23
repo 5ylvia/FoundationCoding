@@ -8,9 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <!-- <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
-    <link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' /> -->
     <script defer src="js/main.js"></script>
     <title>Document</title>
 </head>
@@ -22,7 +21,7 @@
         </div>
     </header>
 
-    <section class="screen">
+    <section class="screen screen--1">
         <div class="page">
             <div class="page__top">
                 <div class="top__icons">
@@ -52,7 +51,7 @@
             </div>
         </div>
     </section>
-    <section class="screen">
+    <section class="screen screen--2">
         <div class="page">
             <div class="page__top">
                 <div class="top__container">
@@ -66,7 +65,7 @@
             </div>
         </div>
     </section>
-    <section class="screen">
+    <section class="screen screen--3">
         <div class="page">
             <div class="page__top">
                 <div class="top__container">
@@ -83,6 +82,7 @@
                         <select id="startpoint">
                             <!-- display options here -->
                         </select>
+                        <span id="startpoint-error"></span>    
                     </div>
                     <div class="form__group">
                         <label for="endpoint">End point</label>
@@ -92,14 +92,14 @@
                         <span id="endpoint-error"></span>    
                     </div>
                     <div class="form__group">
-                        <input type="submit" name="" id="submit-location">
+                        <input type="submit" name="" id="submit-location" value="Calculate the trip cost">
                     </div>
                 </form>
             </div>
             <div id="map"></div>
         </div>
     </section>
-    <section class="screen">
+    <section class="screen screen--4">
         <div class="page">
             <div class="page__inner">
                 <img class="vehicle-icon" src="" alt="">
@@ -107,26 +107,28 @@
                 <h2>Here is your plan</h2>
                 <div class="inner__container">
                     <div class="column">
-                        <h4></h4>
-                        <h3></h3>
+                        <h4>Travel days</h4>
+                        <h3 id="select-day"></h3>
                     </div>
                     <div class="column">
-                        <h4></h4>
-                        <h3></h3>
+                        <h4>Number of traveler</h4>
+                        <h3 id="select-people"></h3>
                     </div>
                 </div>
                 <div class="inner__container">
-                    <h4></h4>
-                    <h3></h3>
+                    <h4>Transport</h4>
+                    <h3 id="select-car"></h3>
                 </div>
                 <div class="inner__container">
-                    <h4></h4>
-                    <h3></h3>
+                    <h4>Direction</h4>
+                    <h3 id="select-location"></h3>
                 </div>
                 <div class="inner__container">
-                    <h3></h3>
-                    <p></p>
-                    <h1></h1>
+                    <h3>Total Price</h3>
+                    <p>Rental cost</p>
+                    <p>Fuel consumption</p>
+                    <p>* Estimated rate</p>
+                    <h1  id="select-cost"></h1>
                 </div>
                 <input type="submit" value="Done" name="" id="">
             </div>

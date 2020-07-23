@@ -14,11 +14,8 @@ $(function init () {
 
     $.getJSON('/dist/json/locations.json', function(data) {
         locationsArray = data.locations;
-        initMap(locationsArray);
-
-
+        displayLocationOptions(locationsArray);
     });
-
 });
 
 // VALIDATE FORM ------------------------------------------------------------- //
@@ -33,6 +30,9 @@ function initValidation (form) {
             isError === true;
         };
     });
+    if (isError === false) {
+        addSubmitEvent();
+    }
 
     function isFieldValid(field) {
         if (!needsValidation(field)) {
@@ -82,33 +82,6 @@ function initValidation (form) {
         }
     }
 
-    // function validateLocation (field, errorSpan) {
-    //     if (form.id === "location-input" && isNumber(field.value)) {
-    //         field.value = '';
-    //         alert('Please type text only!');
-    //         return false;
-    //     }
-    //     if ( form.id === "location-input" && !isLocation(field.value)) {
-    //         addErrorSpan(field, errorSpan);
-    //         errorSpan.innerHTML = "Please select one of the options";
-    //         return false;
-    //     }
-    //     if ( form.id === "location-input" && form[0].value === form[1].value ) {
-    //         addErrorSpan(field, errorSpan);
-    //         errorSpan.innerHTML = "Please select a different option";
-    //         return false;
-    //     }
-    // }
-
-    // function isLocation (input) {
-    //     const locations = locationsArray;
-    //     for (let i = 0; i < locations.length; i++) {
-    //         if (locations[i].title === input) {
-    //             return true;
-    //         }
-    //     }
-    // }
-
     function isNumber (input) {
         return /^[0-9]*$/.test(input);
     }
@@ -122,9 +95,6 @@ function initValidation (form) {
         return ['submit', 'reset', 'button', 'hidden', 'fieldset'].indexOf(field.type) === -1;
     }
 
-    if (isError === false) {
-        displayUserDetail();
-    }
 }
 
 
@@ -209,9 +179,9 @@ function addFilterListener() {
             matches.push(vehiclesArray[i]);
         }
     });
-    if ( matches.length == 0 && (!!day && !!traveler) ) {
+    if ( matches.length === 0 ) {
         alert('No matches! Try different number.');
-    }
+    } else { addSubmitEvent(); }
     getVehiclesByFiltering(matches);
     displayVehicles(matches);
 }
@@ -237,6 +207,29 @@ function getVehiclesByFiltering(matches) {
                 break;
           }
     };
+}
+
+
+// DISPLAY INPUT BY SUMBITING ------------------------------------------------ //
+
+function addSubmitEvent() {
+    $('#submit-user').on('click', function(e) {
+        e.preventDefault();
+        displayUserDetail();
+        let currentScreen = 1;
+        switchScreen(currentScreen);
+    });
+}
+
+function displayUserDetail () {
+    getUserInput();
+    $('.top__traveldays').html(userDetail.traveldays + " days");
+    $('.top__travelers').html(userDetail.travelers + " people");
+}
+
+function getUserInput() {
+    userDetail.traveldays = ( $('#traveldays').val() ) * 1;
+    userDetail.travelers = ( $('#travelers').val() ) * 1;
 }
 
 
@@ -267,28 +260,6 @@ function makeVehicleHTML (vehicle) {
 }
 
 
-// DISPLAY INPUT BY SUMBITING ------------------------------------------------ //
-
-function displayUserDetail () {
-    addSubmitEvent();
-    getUserInput();
-    $('.top__traveldays').html(userDetail.traveldays + " days");
-    $('.top__travelers').html(userDetail.travelers + " people");
-}
-
-function addSubmitEvent() {
-    $('#submit-user').on('click', function(e) {
-        e.preventDefault();
-        let currentScreen = 1;
-        switchScreen(currentScreen);
-    });
-}
-
-function getUserInput() {
-    userDetail.traveldays = ( $('#traveldays').val() ) * 1;
-    userDetail.travelers = ( $('#travelers').val() ) * 1;
-}
-
 
 // GET AND DISPLAY SELECTED VEHICLE ------------------------------------------ //
 
@@ -299,6 +270,7 @@ function addVehicleClickEvent() {
         getSelectedVehicle(e.target);
         let currentScreen = 2;
         switchScreen(currentScreen);
+        initMap(locationsArray);
     });
 }
 
@@ -315,27 +287,26 @@ function getSelectedVehicle(selected) {
 
 function displaySelectedVehicle(vehicle) {
     const imgSrc = "image/icon" + vehicle.id + ".png";
-    $('.vehicle-icon').attr('src', imgSrc);
-    $('.vehicle-title').html(vehicle.title);
+    $('.vehicle-icon').attr({
+        src: imgSrc,
+        alt: vehicle.title
+    });
+    $('.vehicle-title', '#select-car').html(vehicle.title);
     addFinalSubmitEvent();
 }
 
-// DISPLAY SELECT OPTIONS ---------------------------------------------------- //
 
-function displayLocationOptions(locations) {
-    $.each(locations, function(i, location) {
-        $('select').append('<option data-location="' + location.id + '" value="' + location.title + '">' + location.title + '</option>');
-    })
-}
 
 // DISPLAY MAP --------------------------------------------------------------- //
 
 function initMap(locations) {
-    displayLocationOptions(locations);
+    const container = L.DomUtil.get('map');
+    if(container != null){ // Before initializing map check for is the map is already initiated or not
+        container._leaflet_id = null;
+    }
 
-    const geoPoint = locations[0].coordinates;
-    const mymap = L.map('map').setView(geoPoint, 9);
-
+    const geoPoint = locations[4].coordinates;
+    const map = L.map('map', {scrollWheelZoom: false}).setView(geoPoint, 6).invalidateSize();
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -343,74 +314,73 @@ function initMap(locations) {
         tileSize: 512,
         zoomOffset: -1,
         accessToken: 'pk.eyJ1IjoiNXYiLCJhIjoiY2tiaXhjNnFqMGhseTJ5azAycDlmZm05aCJ9.JYtaCI63YUbc0RzpP4GeXA'
-    }).addTo(mymap);
-    addSelectClickEvent();
+    }).addTo(map);
+    addSelectClickEvent(map);
 }
 
 
-// var marker = L.marker(geo, {
-//     opacity:0.5
-// }).addTo(mymap);
+// DISPLAY LOCATION OPTIONS -------------------------------------------------- //
 
-// marker.bindPopup('<h1>Header</h1>');
+function displayLocationOptions(locations) {
+    // $('select').empty(); // Clear all childnodes before appending them.
+    $('select').prepend('<option>Select city</option>');
+    $('select option:eq[0]').prop('disabled',true);
 
-// distance(L.latLng(point), L.latLng(point))
-// var a = map.distance(L.latLng(-36.85984517196145, 174.79248046875), L.latLng(-42.593532625649935, 172.3095703125));
-// console.log(a);
+    $.each(locations, function(i, location) {
+        $('select').append(`<option value="${location.title}">${location.title}</option>`);
+    });
+}
 
-// function getGeojson(locations) {
-//     $.each(locations, function (i, location) {
-//         getLocationInput();
-//         if (userDetail.startpoint === location.title) {
-//             let b = location.coordinates;
-//             console.log(b);
-//         };
-//     });
-// }
-// function initCreateMaker() {
-//     // $('#startpoint').on('click', function() {
-//     //     console.log('click');
-//     //     $.each(locations, function (i, location) {
-//     //         getLocationInput();
-//     //         if (userDetail.startpoint === location.title) {
-//     //             let b = location.coordinates;
-//     //             console.log(b);
-//     //         };
-//     //     });
-//     // });
-
-//     $('select').on('click', function() {
-//         const point = $(this);
-//         const selectedValue = point.val();
-//         console.log(point);
-//         console.log(point.id);
-//         console.log(selectedValue);
-//     })
-// }
-
-
-// GET LOCATION INPUT -------------------------------------------------------- //
-
-function addSelectClickEvent() {
-    $('select').on('click', function() {
-        const select = $(this);
-        getLocationInput(select);
-        console.log(select.val());
-        initCreateMaker(select.val());
+function addSelectClickEvent(map) {
+    $('select').on('change', function(e) {
+        e.preventDefault();
+        const el_select = this;
+        getLocationInput(map, el_select);
     })
 }
 
-function getLocationInput(select) {
-    const inputId = select.attr('id');
-    userDetail[inputId] = select.val();
+// GET LOCATION INPUT -------------------------------------------------------- //
+
+function getLocationInput(map, el_select) {
+    const selectId = $(el_select).attr('id'); // get the select Id
+    userDetail[selectId] = el_select.value; // get and put the value to the userDetail array. 
+
+    const result = locationsArray.find(location => location.title === el_select.value);
+    const selectedGeo = result.coordinates;
+
+    userDetail[selectId+'Geo'] = selectedGeo;
+    createMakers(map, el_select, selectedGeo);
 }
+
 
 // CREATE MAKER -------------------------------------------------------------- //
 
-// function initCreateMaker() {
-//     $.each()
-// }
+function createMakers(map, el_select, selectedGeo) {
+    marker = L.marker(selectedGeo, {opacity:0.5}).addTo(map);
+    const selectCity = el_select.value;
 
+    map.flyTo(selectedGeo, 10);
+    marker.bindPopup('<h1>' + selectCity + '</h1>').openPopup();
+    calculateDistance(map, el_select);
+}
+
+function calculateDistance(map, el_select) {
+    const startGeo = userDetail.startpointGeo;
+    const endGeo = userDetail.endpointGeo;
+
+    if ( startGeo == null || endGeo == null) {
+        userDetail.distance = 0;
+    }
+    else if ( startGeo === endGeo) {
+        userDetail.distance = 0;
+        el_select.value = '';
+        alert ('Please select a different location');
+    }
+    else {
+        const distance = map.distance(L.latLng(startGeo), L.latLng(endGeo));
+        userDetail.distance = Math.round(distance/1000); // get the distance between two location (km)
+    }
+}
 
 
 // GET CONFIRMATION ---------------------------------------------------------- //
@@ -419,15 +389,32 @@ function addFinalSubmitEvent() {
     const btn = $('#submit-location');
     btn.on('click', function(e) {
         e.preventDefault();
-        let currentScreen = 3;
-        switchScreen(currentScreen);
-        // displayConfirmation();
+        if (!userDetail.distance) {
+            alert ('Please select locations')
+        }
+        else {
+            let currentScreen = 3;
+            switchScreen(currentScreen);
+            getTotalcost();    
+        }
     });
 }
 
-// function displayConfirmation() {
+function getTotalcost() {
+    const result = vehiclesArray.find(vehicle => vehicle.id === userDetail.vehicleId);
+    const rentCost = userDetail.traveldays * result.cost;
+    const feulCost = ( result.feul / 100 ) * userDetail.distance * 1.77;
+    const totalCost = rentCost + (feulCost.toFixed(1));
+    displayConfirmation(totalCost);
+}
 
-// }
+
+function displayConfirmation(totalCost) {
+    $('#select-day').html(userDetail.traveldays);
+    $('#select-people').html(userDetail.travelers);
+    $('#select-location').html(userDetail.startpoint + " to" + userDetail.endpoint);
+    $('#select-cost').html(totalCost);
+}
 
 
 // SWICH SCREEN -------------------------------------------------------------- //
@@ -449,19 +436,20 @@ function switchScreen(screen) {
 function backToScreen(el_screens) {
     $('.back').off().on('click', function(event){
         event.preventDefault();
+        alert ('You might lose your information!');
+
         el_screens.hide();
         const currentIndex = $(this).data('back');
         const backIndex = currentIndex - 1;
-        $(el_screens[backIndex]).show();
+        $(el_screens[backIndex]).show();        
     });
 }
 
 function addLogoClickListener () {
     const el_screens = $('.screen');
     $('.header__logo').click(function() {
+        el_screens.hide();
         el_screens.slice(0,1).show();
     });
 }
-
-
 
