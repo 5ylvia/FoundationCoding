@@ -4,15 +4,19 @@
 @import 'map';
 @import 'responsive';
 
+*{ border: 1px solid red; }
 
 h1, h2, h3 {font-family: 'Inter', sans-serif;}
 h4, p {font-family: 'Inter', sans-serif;}
 
-// body {background-color: $neutrayDark;}
-// color: $neutralLight;
 
+body {
+    background-color: $neutrayDark;
+    height:100vh;
+}
 
 .header {
+    height: 100px;
     &__logo {
         width: 100px;
     }
@@ -20,10 +24,14 @@ h4, p {font-family: 'Inter', sans-serif;}
 }
 .screen {
     width: 100vw;
-    // &--0, &--3 {
-    //     height: 100vh;
-    // }
+    &--1, &--4 {
+        height: 80vh;
+
+    }
 }
 
+footer {
+    color: $neutralLight;
+}
 
 

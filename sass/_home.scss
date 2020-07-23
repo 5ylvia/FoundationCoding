@@ -3,12 +3,17 @@
     &__container {
         width: 100%;
         #color-bar {
-            // width: 100%;
+            width: 0;
             height: 0.5rem;
             background-color: $secondary;
         }
     }
 }
+
+// .page {
+//     &__inner {opacity: 0;}
+// }
+
 .top {
     &__icons {
         display: flex;
