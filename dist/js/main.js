@@ -7,10 +7,10 @@ let userDetail = {};
 $( function init () {
     $.getJSON( '/dist/json/vehicles.json', function ( data ) {
         vehiclesArray = data.vehicles;
-        displayIconList( vehiclesArray );
     } );
     initFilter ();
     initScreens ();
+    addIconClickListener ();
 
     $.getJSON( '/dist/json/locations.json', function ( data ) {
         locationsArray = data.locations;
@@ -55,23 +55,24 @@ function initValidation ( form ) {
     function isFilled ( field, errorSpan ) {
         if ( field.value.trim() === '' ) {
             addErrorSpan( field, errorSpan );
-            errorSpan.innerHTML = "This field is required";
+            errorSpan.innerHTML = "* This field is required";
             return false;
         }
     }
     function validateNumber ( field, errorSpan ) {
         if ( form.id === "user-input" && !isNumber( field.value ) ) {
-            alert( 'Please type number only!' );
+            field.value = '';
+            alert( '* Please type number only!' );
             return false;
         }
         if (  field.id === "traveldays" && ( field.value < 1 || field.value > 15 )  ) {
             addErrorSpan( field, errorSpan );
-            errorSpan.innerHTML = "Please enter a 1-15 days";
+            errorSpan.innerHTML = "* Please enter a 1-15 days";
             return false;
         }
         if (  field.id === "travelers" && ( field.value < 1 || field.value > 6 )  ) {
             addErrorSpan( field, errorSpan );
-            errorSpan.innerHTML = "Please enter a 1-6 people";
+            errorSpan.innerHTML = "* Please enter a 1-6 people";
             return false;
         }
     }
@@ -103,43 +104,16 @@ function initFilter () {
         initValidation( form );
     } );
 }
-// ANIMATE ------------------------------------------------------------------- //
 
-$( document ).ready( function () {
-    $( '.top__icons' ).animate( 2000, "swing" );
-    // $( '.page__inner' ).slideDown( {opacity:1}, 3000 );
-} );
-
-// DISPLAY ICON LIST --------------------------------------------------------- //
-
-function displayIconList ( vehicles ) {
-    const el_vehicleIcon = $( '.top__icons' );
-    let iconHTML = '';
-
-    $.each( vehicles, function ( i, icon ) {
-        iconHTML += makeIconHTML( icon );
-    } );
-    el_vehicleIcon.html( iconHTML );
-    addIconClickListener();
-}
-
-function makeIconHTML ( icon ) {
-    return `
-    <div class="icon" data-iconid="${icon.id}">
-        <img src="image/icon${icon.id}.png" alt="${icon.title}">
-        <p></p>
-    </div>
-    `
-}
+// VIEW VEHICLES INFO -------------------------------------------------------- //
 
 function addIconClickListener () {
     $( '.icon' ).on( 'click', function () {
         let id = $( this ).data( 'iconid' );
         viewVehicleInfo( id );
+        $( '.top__text' ).fadeToggle();
     } );
 }
-
-// VIEW VEHICLES INFO -------------------------------------------------------- //
 
 function viewVehicleInfo ( id ) {
     $.each( vehiclesArray, function ( i, vehicle ) {
@@ -160,9 +134,9 @@ function makeInfoHTML ( vehicle ) {
     const text = $( '.top__text' )
 
     if ( maxTraveler == 1 ) {
-        text.html( maxTraveler + " person | " + minDay + " ~ " + maxDay + " days" ); 
+        text.html( `<p> A person for ${minDay}-${maxDay} days` ); 
     } else {
-        text.html( minTraveler + " ~ " + maxTraveler + " people | " + minDay + " ~ " + maxDay + "days" );
+        text.html( `<p>${minTraveler}-${maxTraveler} people for ${minDay}-${maxDay} days` );
     }
 }
 
@@ -218,6 +192,7 @@ function addSubmitEvent ( matches ) {
         } else {
             displayUserDetail();
             let currentScreen = 1;
+            $( '.header__container' ).css('background-color', 'DimGray');
             switchScreen( currentScreen );   
         }
     } );
@@ -253,7 +228,7 @@ function makeVehicleHTML ( vehicle ) {
     <div class="vehicle">
         <img src="image/icon${vehicle.id}.png" alt="${vehicle.title}">
         <h3>${vehicle.title}</h3>
-        <div>NZD ${vehicle.cost}/day  |  ${vehicle.feul}L/100km</div>
+        <p>NZD ${vehicle.cost}/day  |  ${vehicle.feul}L/100km</p>
         <div class="form__group">
             <input class="vehicle-btn" data-id="${vehicle.id}" type="submit" value="Select it">
         </div>
@@ -291,9 +266,10 @@ function displaySelectedVehicle ( vehicle ) {
     const imgSrc = "image/icon" + vehicle.id + ".png";
     $( '.vehicle-icon' ).attr( {
         src: imgSrc,
-        alt: vehicle.title
+        alt: vehicle.title,
     } );
-    $( '.vehicle-title', '#select-car' ).html( vehicle.title );
+    $( '.vehicle-icon' ).css('height', '$h4');
+    $( '.vehicle-title').html( vehicle.title );
     addFinalSubmitEvent();
 }
 
@@ -358,11 +334,11 @@ function getLocationInput ( map, el_select ) {
 // CREATE MAKER -------------------------------------------------------------- //
 
 function createMakers ( map, el_select, selectedGeo ) {
-    marker = L.marker( selectedGeo, {opacity:0.5} ).addTo( map );
+    marker = L.marker( selectedGeo ).addTo( map );
     const selectCity = el_select.value;
 
-    map.flyTo( selectedGeo, 10 );
-    marker.bindPopup( '<h1>' + selectCity + '</h1>' ).openPopup();
+    map.flyTo( selectedGeo, 8 );
+    marker.bindPopup( '<h4>' + selectCity + '</h4>' ).openPopup();
     calculateDistance( map, el_select );
 }
 
@@ -405,8 +381,12 @@ function addFinalSubmitEvent () {
 function getTotalcost () {
     const result = vehiclesArray.find( vehicle => vehicle.id === userDetail.vehicleId );
     const rentCost = userDetail.traveldays * result.cost;
-    const feulCost = ( result.feul / 100  ) * userDetail.distance * 1.77;
-    const totalCost = rentCost + ( feulCost.toFixed( 1 ) );
+    const feul = (( result.feul / 100  ) * userDetail.distance).toFixed( 1 )
+    const feulCost = feul * 1.8;
+    $( '.column--last' ).children('p:first').html( 'Rental cost $' + rentCost );
+    $( '.column--last' ).children('p:eq(1)').html( 'Fuel consumption ' + feul + 'L' );
+
+    const totalCost = rentCost + feulCost;
     displayConfirmation( totalCost );
 }
 
@@ -414,10 +394,10 @@ function getTotalcost () {
 function displayConfirmation ( totalCost ) {
     $( '#select-day' ).html( userDetail.traveldays );
     $( '#select-people' ).html( userDetail.travelers );
-    $( '#select-location' ).html( userDetail.startpoint + " to" + userDetail.endpoint );
-    $( '#select-cost' ).html( totalCost );
-}
+    $( '#select-location' ).html( userDetail.startpoint + " to " + userDetail.endpoint );
+    $( '#select-cost' ).html( "$ " + totalCost );
 
+}
 
 // SWICH SCREEN -------------------------------------------------------------- //
 
@@ -432,34 +412,43 @@ function switchScreen ( screen ) {
     const el_screens = $( '.screen' );
     const nextScreen = screen + 1;
     el_screens.hide();
-    el_screens.slice( screen,nextScreen ).show().slideDown( 2000, 'swing' );
-    initprocessBar();
+    el_screens.slice( screen,nextScreen ).show( 1000 );
+
+    const el_bar = $( '#color-bar' );
+    el_bar.width( el_bar.width() + ( $(window).width() / 3 ) );
 }
 
 function backToScreen ( el_screens ) {
     $( '.back' ).off().on( 'click', function( event ){
         event.preventDefault();
-        alert ( 'You might lose your information!' );
-
-        el_screens.hide();
         const currentIndex = $( this ).data( 'back' );
         const backIndex = currentIndex - 1;
-        $( el_screens[backIndex] ).show().slideDown( 2000, 'swing' );        
+
+        if ( currentIndex === 1 ) {
+            $( '.header__container' ).css('background-color', 'black');
+        }
+
+        el_screens.hide( 1000 );
+        $( el_screens[backIndex] ).show( 1000 );
+        const el_bar = $( '#color-bar' );
+        el_bar.width( backIndex * ( $(window).width() / 3 ) );
+        
     } );
 }
 
 function addLogoClickListener () {
     const el_screens = $( '.screen' );
-    $( '.header__logo' ).click( function() {
+    $( '.header__logo' ).click( function(e) {
+        e.preventDefault();
         el_screens.hide();
-        el_screens.slice( 0,1 ).show().slideDown( 2000, 'swing' );
+        el_screens.slice( 0,1 ).show( 1000 );
+        $( '.header__container' ).css('background-color', 'black');
+        $( '#color-bar' ).width('0');
     } );
 }
 
 function initprocessBar () {
-    const el_colorbar = $( '#color-bar' );
-    const windowWidth = $(window).width();
-    console.log(windowWidth);
-    el_colorbar.width( el_colorbar.width() + ( windowWidth / 3 ) );
+    const el_bar = $( '#color-bar' );
+    el_bar.width( el_bar.width() + ( $(window).width() / 3 ) );
 }
 

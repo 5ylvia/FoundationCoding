@@ -1,30 +1,113 @@
 .header {
-    width: 100vw;
+    height: 15vh;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    width: 100%;
+    &__logo {
+        width: ( $h1 * 4 );
+        margin: 10px 5%;
+    }
     &__container {
         width: 100%;
+        background-color: black;
         #color-bar {
             width: 0;
-            height: 0.5rem;
+            height: 5px;
             background-color: $secondary;
         }
     }
 }
+.screen {
+    width: 100%;
+    &--1, &--4 { 
+        height: 70vh;
+        .page__top {height: 120px;}
+    }
+    &--2, &--3 { height: auto; }
+    &--4 {.form {position: relative;}}
+}
 
-// .page {
-//     &__inner {opacity: 0;}
-// }
+.page {
+    width: 100%;
+    &__top {
+        position: relative;
+        height: ( $h1 * 4 );
+    }
+    &__inner {
+        display: flex;
+        justify-content: center;
+    }
+    &__contents {
+        padding: 5%;
+        background-color: white;
+        .vehicle {
+            padding: 40px 0;
+            img {width: 100%;}
+            .form__group {padding: 0;}
+        }
+    }
+    &__location {
+        display: flex;
+        justify-content: center;
+        background-color: $secondary;
+    }
+}
 
 .top {
+    &__text { 
+        color: $primary; 
+        letter-spacing: 2px;
+        padding-top: 20px;
+        p { text-align: center; }
+    }
     &__icons {
         display: flex;
-        width: 100%;
+        justify-content: space-around;
+        position: absolute;
+        bottom: 0;
+        width: 90%;
+        margin: 0 5%;
+
         .icon {
-            opacity: 0.3;
-            margin: 10px;
+            opacity: 0.5;
+            img {width: ( $h2 * 3 );}
         }
-        .highlight {
-            opacity: 1;
+        .highlight {opacity: 1;}
+    }
+    &__container {
+        height: 100%;
+        padding: 20px 10%;
+
+        &--1 {
+            background-color: $primary;
+            color: $neutralLight;
+        }
+        &--2 {
+            background-color: white;
         }
     }
 }
 
+
+.vehicle-icon {
+    width: ( $h1 * 3 );
+}
+
+.back { 
+    color: $secondary; 
+    font-size: ( $h2 * 2 );
+    position: absolute;
+    top: 20px;
+    right: 10%;
+    &:hover { color: rgba($neutral, 0.5)}
+}
+
+
+
+footer {
+    height: 10vh;
+    color: rgba($neutral, 0.5);
+    text-align: center;
+    margin-top: 5vh;
+}

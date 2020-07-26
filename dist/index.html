@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;600&display=swap" rel="stylesheet">    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
 
@@ -24,28 +23,40 @@
     <section class="screen screen--1">
         <div class="page">
             <div class="page__top">
-                <div class="top__icons">
-                    <!-- display vehicle icons here -->
-                </div>
                 <div class="top__text">
                     <!-- show the vehicle information here -->
                 </div>    
+
+                <div class="top__icons">
+                    <div class="icon" data-iconid="1">
+                        <img src="image/icon1.png" alt="Motorbike">
+                    </div>
+                    <div class="icon" data-iconid="2">
+                        <img src="image/icon2.png" alt="Small car">
+                    </div>
+                    <div class="icon" data-iconid="3">
+                        <img src="image/icon3.png" alt="Large car">
+                    </div>
+                    <div class="icon" data-iconid="4">
+                        <img src="image/icon4.png" alt="Motor home">
+                    </div>
+                </div>
             </div>
             <div class="page__inner">
-                <h2>Tell us your trip</h2>
-                <form id="user-input">
+                <form id="user-input" class="form">
+                    <h1>Tell us your trip</h1>
                     <div class="form__group">
-                        <label for="traveldays"></label>
-                        <input type="text" name="traveldays" id="traveldays" placeholder="Travel days">
+                        <label for="traveldays">Travel days</label>
+                        <input type="text" name="traveldays" id="traveldays">
                         <span id="traveldays-error"></span>    
                     </div>
                     <div class="form__group">
-                        <label for="travelers"></label>
-                        <input type="text" name="travelers" id="travelers" placeholder="Number of travelers">
+                        <label for="travelers">Number of travelers</label>
+                        <input type="text" name="travelers" id="travelers">
                         <span id="travelers-error"></span>    
                     </div>
                     <div class="form__group">
-                        <input id="submit-user" type="submit" value="Search your vehicles">
+                        <input id="submit-user" type="submit" value="search your vehicles">
                     </div>
                 </form>
             </div>
@@ -54,7 +65,7 @@
     <section class="screen screen--2">
         <div class="page">
             <div class="page__top">
-                <div class="top__container">
+                <div class="top__container top__container--1">
                     <h1 class="top__traveldays"></h1>
                     <h1 class="top__travelers"></h1>
                     <a data-back="1" class="back"><i class="fas fa-arrow-left"></i></a>
@@ -68,31 +79,29 @@
     <section class="screen screen--3">
         <div class="page">
             <div class="page__top">
-                <div class="top__container">
+                <div class="top__container top__container--2">
                     <img class="vehicle-icon" src="" alt="">
-                    <h1 class="vehicle-title" ></h1>
+                    <h3 class="vehicle-title" ></h3>
                     <a data-back="2" class="back"><i class="fas fa-arrow-left"></i></a>
                 </div>    
             </div>
             <div class="page__location">
-                <h2>Plan your Trip</h2>
-                <form id="location-input">
+                <form id="location-input" class="form">
+                    <h1>Plan your Trip</h1>
                     <div class="form__group">
-                        <label for="startpoint">Start point</label>
+                        <label for="startpoint">From</label>
                         <select id="startpoint">
                             <!-- display options here -->
                         </select>
-                        <span id="startpoint-error"></span>    
                     </div>
                     <div class="form__group">
-                        <label for="endpoint">End point</label>
+                        <label for="endpoint">To</label>
                         <select id="endpoint">
                             <!-- display options here -->
                         </select>
-                        <span id="endpoint-error"></span>    
                     </div>
                     <div class="form__group">
-                        <input type="submit" name="" id="submit-location" value="Calculate the trip cost">
+                        <input type="submit" name="" id="submit-location" value="calculate the trip cost">
                     </div>
                 </form>
             </div>
@@ -102,41 +111,45 @@
     <section class="screen screen--4">
         <div class="page">
             <div class="page__inner">
-                <img class="vehicle-icon" src="" alt="">
-                <a data-back="3" class="back"><i class="fas fa-arrow-left"></i></a>
-                <h2>Here is your plan</h2>
-                <div class="inner__container">
-                    <div class="column">
-                        <h4>Travel days</h4>
-                        <h3 id="select-day"></h3>
+                <div class="form">
+                    <img class="vehicle-icon" src="" alt="">
+                    <a data-back="3" class="back"><i class="fas fa-arrow-left"></i></a>
+                    <h2>Here is your plan</h2>
+                    <div class="row">
+                        <div class="column">
+                            <p>Travel days</p>
+                            <h3 id="select-day"></h3>
+                        </div>
+                        <div class="column">
+                            <p>Number of traveler</p>
+                            <h3 id="select-people"></h3>
+                        </div>
                     </div>
                     <div class="column">
-                        <h4>Number of traveler</h4>
-                        <h3 id="select-people"></h3>
+                        <p>Transport</p>
+                        <h3 class="vehicle-title"></h3>
+                    </div>
+                    <div class="column">
+                        <p>Direction</p>
+                        <h3 id="select-location"></h3>
+                    </div>
+                    <div class="column column--last">
+                        <h3>Total Price</h3>
+                        <p></p>
+                        <p></p>
+                        <p>* Estimated rate</p>    
+                        <h1 id="select-cost"></h1>
+                    </div>
+                    <div class="form__group">
+                        <input type="submit" value="done">
                     </div>
                 </div>
-                <div class="inner__container">
-                    <h4>Transport</h4>
-                    <h3 id="select-car"></h3>
-                </div>
-                <div class="inner__container">
-                    <h4>Direction</h4>
-                    <h3 id="select-location"></h3>
-                </div>
-                <div class="inner__container">
-                    <h3>Total Price</h3>
-                    <p>Rental cost</p>
-                    <p>Fuel consumption</p>
-                    <p>* Estimated rate</p>
-                    <h1  id="select-cost"></h1>
-                </div>
-                <input type="submit" value="Done" name="" id="">
             </div>
         </div>
     </section>
 
     <footer>
-        <h3>TOURISM NEW ZEALAND</h3>
+        <h4>TOURISM NEW ZEALAND</h4>
     </footer>
 </body>
 </html>

@@ -4,34 +4,12 @@
 @import 'map';
 @import 'responsive';
 
-*{ border: 1px solid red; }
-
-h1, h2, h3 {font-family: 'Inter', sans-serif;}
-h4, p {font-family: 'Inter', sans-serif;}
+// *{ border: 1px solid rgba(132, 132, 212, 0.575); }
 
 
 body {
+    font-family: 'Inter', sans-serif;
     background-color: $neutrayDark;
-    height:100vh;
-}
-
-.header {
-    height: 100px;
-    &__logo {
-        width: 100px;
-    }
-    // &__container
-}
-.screen {
     width: 100vw;
-    &--1, &--4 {
-        height: 80vh;
-
-    }
 }
-
-footer {
-    color: $neutralLight;
-}
-
 
