@@ -62,7 +62,7 @@ function initValidation ( form ) {
     function validateNumber ( field, errorSpan ) {
         if ( form.id === "user-input" && !isNumber( field.value ) ) {
             field.value = '';
-            alert( '* Please type number only!' );
+            swal( "Oh noes!", 'Please type number only!', 'error' );
             return false;
         }
         if (  field.id === "traveldays" && ( field.value < 1 || field.value > 15 )  ) {
@@ -197,7 +197,7 @@ function addSubmitEvent ( matches ) {
     $( '#submit-user' ).off().on( 'click', function( e ) {
         e.preventDefault();
         if ( matches.length === 0  ) {
-            alert( 'No matches! Try different number.' );
+            swal( 'No matches!','Try different number.','warning' );
         } else {
             displayUserDetail();
             let currentScreen = 1;
@@ -361,7 +361,7 @@ function calculateDistance ( map, el_select ) {
     else if ( startGeo === endGeo ) {
         userDetail.distance = 0;
         el_select.value = '';
-        alert ( 'Please select a different location' );
+        swal ( 'Please select a different location');
     }
     else {
         const distance = map.distance( L.latLng( startGeo ), L.latLng( endGeo ) );
@@ -377,7 +377,7 @@ function addFinalSubmitEvent () {
     btn.on( 'click', function( e ) {
         e.preventDefault();
         if ( !userDetail.distance ) {
-            alert ( 'Please select locations' )
+            swal ( "Oh noes", 'Please select locations.' , 'error' )
         }
         else {
             let currentScreen = 3;

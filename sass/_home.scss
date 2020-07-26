@@ -21,7 +21,6 @@
 .screen {
     width: 100%;
     &--1 { 
-        height: 70vh;
         .page__top {height: 120px;}
     }
     &--2, &--3, &--4 { height: auto; }
@@ -30,10 +29,13 @@
         background-size: 100%;
         background-position: center;
         .form {position: relative; height: 100%;}
+        #map { height: 580px; width:100vw;}
     }
 }
 
 .page {
+    height: 100%;
+    overflow: scroll;
     width: 100%;
     .hidden { display: none; }
 

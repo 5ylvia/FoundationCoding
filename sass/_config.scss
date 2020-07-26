@@ -44,7 +44,7 @@ $p: .875rem;
 
 		@media screen and (min-width: $max-vw) {
 			@each $property in $properties {
-				#{$property}: $max-value * 2 / 3;
+				#{$property}: $max-value * 3 / 5;
 			}
 		}
 	}

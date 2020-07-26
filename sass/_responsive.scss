@@ -40,7 +40,7 @@ span {
         display: flex;
         height: 100%;
         &__inner {
-            margin-bottom: 100px;
+            margin-top: 100px;
             width: 100%;
         }
         &__top {
@@ -53,11 +53,11 @@ span {
         &__text {
             position: absolute;
             width: 100%;
-            bottom: 200px;
+            bottom: 100px;
             padding: 20px;
         }
         &__icons {
-            bottom: 100px;
+            bottom: 0;
             margin: 5%;
         }
         &__container--2 { height: 30%; }
@@ -74,7 +74,7 @@ span {
                 .hidden { 
                     display: block;
                     position: absolute;
-                    bottom: 200px;
+                    bottom: 100px;
                     left: 0;
                     padding: 50px;
                     img { width: 100%; }
@@ -105,6 +105,7 @@ span {
             .page{
                 &__top {height: 100%; width: 70%;}
             }
+            // .top__location {overflow: scroll;}
         }
         &--4 { overflow: scroll; 
             .form { height: 700px; }
