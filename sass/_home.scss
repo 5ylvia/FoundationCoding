@@ -13,26 +13,33 @@
         background-color: black;
         #color-bar {
             width: 0;
-            height: 5px;
+            height: 0.4rem;
             background-color: $secondary;
         }
     }
 }
 .screen {
     width: 100%;
-    &--1, &--4 { 
+    &--1 { 
         height: 70vh;
         .page__top {height: 120px;}
     }
-    &--2, &--3 { height: auto; }
-    &--4 {.form {position: relative;}}
+    &--2, &--3, &--4 { height: auto; }
+    &--4 {
+        background-image: url('/dist/image/simon-migaj-sa7KClvDBpo-unsplash.jpg');
+        background-size: 100%;
+        background-position: center;
+        .form {position: relative; height: 100%;}
+    }
 }
 
 .page {
     width: 100%;
+    .hidden { display: none; }
+
     &__top {
         position: relative;
-        height: ( $h1 * 4 );
+        height: 100%;
     }
     &__inner {
         display: flex;
@@ -46,11 +53,6 @@
             img {width: 100%;}
             .form__group {padding: 0;}
         }
-    }
-    &__location {
-        display: flex;
-        justify-content: center;
-        background-color: $secondary;
     }
 }
 
@@ -71,7 +73,7 @@
 
         .icon {
             opacity: 0.5;
-            img {width: ( $h2 * 3 );}
+            img {width: ( $h1 * 2.3 );}
         }
         .highlight {opacity: 1;}
     }
@@ -87,22 +89,26 @@
             background-color: white;
         }
     }
+    &__location {
+        display: flex;
+        justify-content: center;
+        background-color: $secondary;
+    }
 }
 
 
 .vehicle-icon {
-    width: ( $h1 * 3 );
+    width: ( $h1 * 3.8 );
 }
 
 .back { 
     color: $secondary; 
-    font-size: ( $h2 * 2 );
+    font-size: ( $h1 * 1.5 );
     position: absolute;
     top: 20px;
     right: 10%;
-    &:hover { color: rgba($neutral, 0.5)}
+    &:hover { color: rgba($neutral, 0.8)}
 }
-
 
 
 footer {

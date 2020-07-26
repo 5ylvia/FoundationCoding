@@ -1,0 +1,117 @@
+html {
+	@include fluid-type(font-size, $minScreen, $maxScreen, $minFont, $maxFont);
+}
+
+
+h1, h2, h3 {
+	font-weight: 600;
+	// margin-bottom: $p;
+}
+h4, p {
+    font-weight: 200;
+	// margin-bottom: $p; 
+}
+
+h1 { font-size: $h1; }
+
+h2 { font-size: $h2; }
+
+h3 { font-size: $h3; }
+
+h4 { font-size: $h4; }
+
+p{ font-size : $p; }
+
+span {
+    font-size: $p;
+    margin-top: ( $p / 2 );
+}
+
+@include medium($minScreen, $maxScreen) {
+    .form { width: 80% }
+    .top__icons {
+        width: 80%;
+        margin: 0 10%;
+    }
+}
+
+@include large($minScreen, $maxScreen) {
+    .page { 
+        display: flex;
+        height: 100%;
+        &__inner {
+            margin-bottom: 100px;
+            width: 100%;
+        }
+        &__top {
+            width: 100%;
+        }
+        #map { height: 100%; width: 100%;}
+     }
+
+    .top {
+        &__text {
+            position: absolute;
+            width: 100%;
+            bottom: 200px;
+            padding: 20px;
+        }
+        &__icons {
+            bottom: 100px;
+            margin: 5%;
+        }
+        &__container--2 { height: 30%; }
+        &__location { height: 70%; }
+    }
+
+    .screen {
+        width: 100vw;
+        height: 70vh;
+        &--1 {
+            .page {
+                flex-direction: row-reverse;
+                align-items: flex-end;
+                .hidden { 
+                    display: block;
+                    position: absolute;
+                    bottom: 200px;
+                    left: 0;
+                    padding: 50px;
+                    img { width: 100%; }
+                }
+            }
+        }
+        &--2 { 
+            .page { 
+                background-image: url('/dist/image/bruno-bergher--8ttvM3Ca94-unsplash.jpg');
+                background-size: 100%;
+                background-position: center;
+                .top__container--1 {background-color: rgba( $primary, 0.8);}
+                &__contents {
+                    padding: 5%; margin: 5%;
+                    border-radius: 5px;
+                    display: flex; 
+                    flex-wrap: wrap;
+                    width: 100%;
+                    overflow: scroll;
+                }
+                .vehicle {
+                    padding: 20px;
+                    width: 50%;
+                }
+            }
+        }
+        &--2, &--3 {
+            .page{
+                &__top {height: 100%; width: 70%;}
+            }
+        }
+        &--4 { overflow: scroll; 
+            .form { height: 700px; }
+        } 
+    }
+
+    .form {
+        max-width: 600px;
+    }
+}

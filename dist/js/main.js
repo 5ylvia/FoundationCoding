@@ -120,6 +120,7 @@ function viewVehicleInfo ( id ) {
         if ( vehicle.id == id ) {
             let vehicle = vehiclesArray[i];
             makeInfoHTML( vehicle );
+            viewVehiclePhoto ( vehicle );
         };
     } );
 }
@@ -134,12 +135,20 @@ function makeInfoHTML ( vehicle ) {
     const text = $( '.top__text' )
 
     if ( maxTraveler == 1 ) {
-        text.html( `<p> A person for ${minDay}-${maxDay} days` ); 
+        text.html( `<p>A person for ${minDay}-${maxDay} days</p>` );
     } else {
-        text.html( `<p>${minTraveler}-${maxTraveler} people for ${minDay}-${maxDay} days` );
+        text.html( `<p>${minTraveler}-${maxTraveler} people for ${minDay}-${maxDay} days</p>` );
     }
 }
 
+
+function viewVehiclePhoto ( vehicle ) {
+    const imgSrc = "image/" + vehicle.id + ".png";
+    $( '.hidden img' ).attr( {
+        src: imgSrc,
+        alt: vehicle.title,
+    } );
+}
 
 // FILTER BY INPUT ----------------------------------------------------------- //
 
@@ -226,7 +235,7 @@ function displayVehicles ( vehicles ) {
 function makeVehicleHTML ( vehicle ) {
     return `
     <div class="vehicle">
-        <img src="image/icon${vehicle.id}.png" alt="${vehicle.title}">
+        <img src="image/${vehicle.id}.png" alt="${vehicle.title}">
         <h3>${vehicle.title}</h3>
         <p>NZD ${vehicle.cost}/day  |  ${vehicle.feul}L/100km</p>
         <div class="form__group">
@@ -337,7 +346,7 @@ function createMakers ( map, el_select, selectedGeo ) {
     marker = L.marker( selectedGeo ).addTo( map );
     const selectCity = el_select.value;
 
-    map.flyTo( selectedGeo, 8 );
+    map.flyTo( selectedGeo, 10 );
     marker.bindPopup( '<h4>' + selectCity + '</h4>' ).openPopup();
     calculateDistance( map, el_select );
 }
@@ -382,11 +391,11 @@ function getTotalcost () {
     const result = vehiclesArray.find( vehicle => vehicle.id === userDetail.vehicleId );
     const rentCost = userDetail.traveldays * result.cost;
     const feul = (( result.feul / 100  ) * userDetail.distance).toFixed( 1 )
-    const feulCost = feul * 1.8;
+    const feulCost = feul * 1.77;
     $( '.column--last' ).children('p:first').html( 'Rental cost $' + rentCost );
     $( '.column--last' ).children('p:eq(1)').html( 'Fuel consumption ' + feul + 'L' );
 
-    const totalCost = rentCost + feulCost;
+    const totalCost = ( rentCost + feulCost ).toFixed(1);
     displayConfirmation( totalCost );
 }
 
@@ -394,7 +403,8 @@ function getTotalcost () {
 function displayConfirmation ( totalCost ) {
     $( '#select-day' ).html( userDetail.traveldays );
     $( '#select-people' ).html( userDetail.travelers );
-    $( '#select-location' ).html( userDetail.startpoint + " to " + userDetail.endpoint );
+    $( '#select-location' ).html( userDetail.startpoint + " to " + userDetail.endpoint);
+    $( '#select-location' ).after("<p>( " + userDetail.distance + " km)</p>")
     $( '#select-cost' ).html( "$ " + totalCost );
 
 }
@@ -428,7 +438,7 @@ function backToScreen ( el_screens ) {
             $( '.header__container' ).css('background-color', 'black');
         }
 
-        el_screens.hide( 1000 );
+        el_screens.hide();
         $( el_screens[backIndex] ).show( 1000 );
         const el_bar = $( '#color-bar' );
         el_bar.width( backIndex * ( $(window).width() / 3 ) );

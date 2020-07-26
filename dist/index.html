@@ -23,6 +23,7 @@
     <section class="screen screen--1">
         <div class="page">
             <div class="page__top">
+                <div class="hidden"><img src="" alt=""></div>
                 <div class="top__text">
                     <!-- show the vehicle information here -->
                 </div>    
@@ -83,27 +84,27 @@
                     <img class="vehicle-icon" src="" alt="">
                     <h3 class="vehicle-title" ></h3>
                     <a data-back="2" class="back"><i class="fas fa-arrow-left"></i></a>
-                </div>    
-            </div>
-            <div class="page__location">
-                <form id="location-input" class="form">
-                    <h1>Plan your Trip</h1>
-                    <div class="form__group">
-                        <label for="startpoint">From</label>
-                        <select id="startpoint">
-                            <!-- display options here -->
-                        </select>
-                    </div>
-                    <div class="form__group">
-                        <label for="endpoint">To</label>
-                        <select id="endpoint">
-                            <!-- display options here -->
-                        </select>
-                    </div>
-                    <div class="form__group">
-                        <input type="submit" name="" id="submit-location" value="calculate the trip cost">
-                    </div>
-                </form>
+                </div> 
+                <div class="top__location">
+                    <form id="location-input" class="form">
+                        <h1>Plan your Trip</h1>
+                        <div class="form__group">
+                            <label for="startpoint">From</label>
+                            <select id="startpoint">
+                                <!-- display options here -->
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <label for="endpoint">To</label>
+                            <select id="endpoint">
+                                <!-- display options here -->
+                            </select>
+                        </div>
+                        <div class="form__group">
+                            <input type="submit" name="" id="submit-location" value="calculate the trip cost">
+                        </div>
+                    </form>
+                </div>       
             </div>
             <div id="map"></div>
         </div>
@@ -117,11 +118,11 @@
                     <h2>Here is your plan</h2>
                     <div class="row">
                         <div class="column">
-                            <p>Travel days</p>
+                            <p>A travel day</p>
                             <h3 id="select-day"></h3>
                         </div>
                         <div class="column">
-                            <p>Number of traveler</p>
+                            <p>| A number of travelers</p>
                             <h3 id="select-people"></h3>
                         </div>
                     </div>

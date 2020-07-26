@@ -5,59 +5,6 @@
   padding: 0;
 }
 
-html {
-  text-rendering: optimizeLegibility;
-}
-
-html {
-  font-size: 0.8rem;
-}
-
-@media screen and (min-width: 20rem) {
-  html {
-    font-size: calc(0.8rem + 1.2 * ((100vw - 20rem) / 40));
-  }
-}
-
-@media screen and (min-width: 60rem) {
-  html {
-    font-size: 2rem;
-  }
-}
-
-h1, h2, h3 {
-  font-weight: 600;
-}
-
-h4, p {
-  font-weight: 200;
-}
-
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.5rem;
-}
-
-h3 {
-  font-size: 1.25rem;
-}
-
-h4 {
-  font-size: 1rem;
-}
-
-p {
-  font-size: 0.875rem;
-}
-
-span {
-  font-size: 0.875rem;
-  margin-top: 0.4375rem;
-}
-
 .header {
   height: 15vh;
   display: -webkit-box;
@@ -85,7 +32,7 @@ span {
 
 .header__container #color-bar {
   width: 0;
-  height: 5px;
+  height: 0.4rem;
   background-color: #FCBC3F;
 }
 
@@ -93,29 +40,40 @@ span {
   width: 100%;
 }
 
-.screen--1, .screen--4 {
+.screen--1 {
   height: 70vh;
 }
 
-.screen--1 .page__top, .screen--4 .page__top {
+.screen--1 .page__top {
   height: 120px;
 }
 
-.screen--2, .screen--3 {
+.screen--2, .screen--3, .screen--4 {
   height: auto;
+}
+
+.screen--4 {
+  background-image: url("/dist/image/simon-migaj-sa7KClvDBpo-unsplash.jpg");
+  background-size: 100%;
+  background-position: center;
 }
 
 .screen--4 .form {
   position: relative;
+  height: 100%;
 }
 
 .page {
   width: 100%;
 }
 
+.page .hidden {
+  display: none;
+}
+
 .page__top {
   position: relative;
-  height: 8rem;
+  height: 100%;
 }
 
 .page__inner {
@@ -142,16 +100,6 @@ span {
 
 .page__contents .vehicle .form__group {
   padding: 0;
-}
-
-.page__location {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  background-color: #FCBC3F;
 }
 
 .top__text {
@@ -181,7 +129,7 @@ span {
 }
 
 .top__icons .icon img {
-  width: 4.5rem;
+  width: 4.6rem;
 }
 
 .top__icons .highlight {
@@ -202,8 +150,18 @@ span {
   background-color: white;
 }
 
+.top__location {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #FCBC3F;
+}
+
 .vehicle-icon {
-  width: 6rem;
+  width: 7.6rem;
 }
 
 .back {
@@ -215,7 +173,7 @@ span {
 }
 
 .back:hover {
-  color: rgba(170, 170, 170, 0.5);
+  color: rgba(170, 170, 170, 0.8);
 }
 
 footer {
@@ -226,7 +184,7 @@ footer {
 }
 
 .form {
-  padding: 70px 20px;
+  padding: 60px 20px;
   background-color: white;
   border-radius: 5px;
   text-align: center;
@@ -292,7 +250,6 @@ footer {
 }
 
 .form .column {
-  float: left;
   width: 100%;
   text-align: left;
   padding: 10px;
@@ -340,7 +297,7 @@ footer {
   padding-left: 10px;
   font-family: inherit;
   color: #F6F6F6;
-  background: url("/dist/image/Arrow.png") no-repeat 95% 50%;
+  background: url("/dist/image/Arrow.png") no-repeat 100% 50%;
   border: 2px solid #F6F6F6;
   border-radius: 0px;
   -webkit-appearance: none;
@@ -359,6 +316,167 @@ footer {
 #map {
   height: 580px;
   width: 100vw;
+}
+
+html {
+  font-size: 0.8rem;
+}
+
+@media screen and (min-width: 20rem) {
+  html {
+    font-size: calc(0.8rem + 1.2 * ((100vw - 20rem) / 40));
+  }
+}
+
+@media screen and (min-width: 40rem) {
+  html {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 60rem) {
+  html {
+    font-size: 1.33333rem;
+  }
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+}
+
+h4, p {
+  font-weight: 200;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+p {
+  font-size: 0.875rem;
+}
+
+span {
+  font-size: 0.875rem;
+  margin-top: 0.4375rem;
+}
+
+@media screen and (min-width: 40rem) {
+  .form {
+    width: 80%;
+  }
+  .top__icons {
+    width: 80%;
+    margin: 0 10%;
+  }
+}
+
+@media screen and (min-width: 60rem) {
+  .page {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+  }
+  .page__inner {
+    margin-bottom: 100px;
+    width: 100%;
+  }
+  .page__top {
+    width: 100%;
+  }
+  .page #map {
+    height: 100%;
+    width: 100%;
+  }
+  .top__text {
+    position: absolute;
+    width: 100%;
+    bottom: 200px;
+    padding: 20px;
+  }
+  .top__icons {
+    bottom: 100px;
+    margin: 5%;
+  }
+  .top__container--2 {
+    height: 30%;
+  }
+  .top__location {
+    height: 70%;
+  }
+  .screen {
+    width: 100vw;
+    height: 70vh;
+  }
+  .screen--1 .page {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+    -webkit-box-align: end;
+        -ms-flex-align: end;
+            align-items: flex-end;
+  }
+  .screen--1 .page .hidden {
+    display: block;
+    position: absolute;
+    bottom: 200px;
+    left: 0;
+    padding: 50px;
+  }
+  .screen--1 .page .hidden img {
+    width: 100%;
+  }
+  .screen--2 .page {
+    background-image: url("/dist/image/bruno-bergher--8ttvM3Ca94-unsplash.jpg");
+    background-size: 100%;
+    background-position: center;
+  }
+  .screen--2 .page .top__container--1 {
+    background-color: rgba(63, 148, 252, 0.8);
+  }
+  .screen--2 .page__contents {
+    padding: 5%;
+    margin: 5%;
+    border-radius: 5px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    width: 100%;
+    overflow: scroll;
+  }
+  .screen--2 .page .vehicle {
+    padding: 20px;
+    width: 50%;
+  }
+  .screen--2 .page__top, .screen--3 .page__top {
+    height: 100%;
+    width: 70%;
+  }
+  .screen--4 {
+    overflow: scroll;
+  }
+  .screen--4 .form {
+    height: 700px;
+  }
+  .form {
+    max-width: 600px;
+  }
 }
 
 body {

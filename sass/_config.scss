@@ -36,9 +36,15 @@ $p: .875rem;
 			}
 		}
 
+		@media screen and (min-width: $min-vw * 2) {
+			@each $property in $properties {
+				#{$property}: $max-value /2;
+			}
+		}
+
 		@media screen and (min-width: $max-vw) {
 			@each $property in $properties {
-				#{$property}: $max-value;
+				#{$property}: $max-value * 2 / 3;
 			}
 		}
 	}
@@ -48,32 +54,17 @@ $p: .875rem;
 	@return $value / ($value * 0 + 1);
 }
 
-html {
-	text-rendering: optimizeLegibility;
-	@include fluid-type(font-size, $minScreen, $maxScreen, $minFont, $maxFont);
+
+@mixin medium($min-vw, $max-vw) {
+    @media screen and (min-width: $min-vw * 2) {
+        @content;
+    }
+}
+
+@mixin large($min-vw, $max-vw) {
+    @media screen and (min-width: $max-vw) {
+        @content;
+    }
 }
 
 
-h1, h2, h3 {
-	font-weight: 600;
-	// margin-bottom: $p;
-}
-h4, p {
-    font-weight: 200;
-	// margin-bottom: $p; 
-}
-
-h1 { font-size: $h1; }
-
-h2 { font-size: $h2; }
-
-h3 { font-size: $h3; }
-
-h4 { font-size: $h4; }
-
-p{ font-size : $p; }
-
-span {
-    font-size: $p;
-    margin-top: ( $p / 2 );
-}
